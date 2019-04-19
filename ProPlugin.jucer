@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="G6Ujzv" name="ProPlugin" projectType="audioplug" jucerVersion="5.4.3">
+  <MAINGROUP id="a1lk7v" name="ProPlugin">
+    <GROUP id="{D7D072F8-C36A-AE99-3802-ED50E371CD66}" name="Parameter Control">
+      <FILE id="xw6noN" name="ProComboBox.cpp" compile="1" resource="0" file="Source/ProComboBox.cpp"/>
+      <FILE id="LEBpvJ" name="ProComboBox.h" compile="0" resource="0" file="Source/ProComboBox.h"/>
+      <FILE id="r1HGBs" name="ProParameterKnob.cpp" compile="1" resource="0"
+            file="Source/ProParameterKnob.cpp"/>
+      <FILE id="DTY0Xo" name="ProParameterKnob.h" compile="0" resource="0"
+            file="Source/ProParameterKnob.h"/>
+    </GROUP>
+    <GROUP id="{A34A19C5-0749-5F59-FBFF-08D5BACE7E3A}" name="Panels">
+      <FILE id="ne3Lxm" name="ProCenterPanel.cpp" compile="1" resource="0"
+            file="Source/ProCenterPanel.cpp"/>
+      <FILE id="X7xWY6" name="ProCenterPanel.h" compile="0" resource="0"
+            file="Source/ProCenterPanel.h"/>
+      <FILE id="tLi1gQ" name="ProCenterPanelMenuBar.cpp" compile="1" resource="0"
+            file="Source/ProCenterPanelMenuBar.cpp"/>
+      <FILE id="rgp10s" name="ProCenterPanelMenuBar.h" compile="0" resource="0"
+            file="Source/ProCenterPanelMenuBar.h"/>
+      <FILE id="Igoa8N" name="ProEffectsPanel.cpp" compile="1" resource="0"
+            file="Source/ProEffectsPanel.cpp"/>
+      <FILE id="TVxcJb" name="ProEffectsPanel.h" compile="0" resource="0"
+            file="Source/ProEffectsPanel.h"/>
+      <FILE id="uCmCjW" name="ProGainPanel.cpp" compile="1" resource="0"
+            file="Source/ProGainPanel.cpp"/>
+      <FILE id="iMaLZc" name="ProGainPanel.h" compile="0" resource="0" file="Source/ProGainPanel.h"/>
+      <FILE id="O4A2A5" name="ProMainPanel.cpp" compile="1" resource="0"
+            file="Source/ProMainPanel.cpp"/>
+      <FILE id="EO7ZAu" name="ProMainPanel.h" compile="0" resource="0" file="Source/ProMainPanel.h"/>
+      <FILE id="A4xDqm" name="ProPanelBase.cpp" compile="1" resource="0"
+            file="Source/ProPanelBase.cpp"/>
+      <FILE id="FGxj48" name="ProPanelBase.h" compile="0" resource="0" file="Source/ProPanelBase.h"/>
+      <FILE id="bmNKLZ" name="ProTopPanel.cpp" compile="1" resource="0" file="Source/ProTopPanel.cpp"/>
+      <FILE id="H6x9DL" name="ProTopPanel.h" compile="0" resource="0" file="Source/ProTopPanel.h"/>
+    </GROUP>
+    <GROUP id="{B3BC6FDD-2C3E-63F8-21AE-AEDA51F236CB}" name="Helpers">
+      <FILE id="GqHVNT" name="ProAudioHelpers.h" compile="0" resource="0"
+            file="Source/ProAudioHelpers.h"/>
+      <FILE id="aMyznG" name="ProHelperFunctions.h" compile="0" resource="0"
+            file="Source/ProHelperFunctions.h"/>
+      <FILE id="vNDLlJ" name="ProInterfaceDefines.h" compile="0" resource="0"
+            file="Source/ProInterfaceDefines.h"/>
+      <FILE id="rGmwmh" name="ProParameters.h" compile="0" resource="0" file="Source/ProParameters.h"/>
+    </GROUP>
+    <GROUP id="{5D964958-3E0E-0D2C-3AD0-9D3934899F3E}" name="DSP">
+      <FILE id="GO7VA9" name="ProDelay.cpp" compile="1" resource="0" file="Source/ProDelay.cpp"/>
+      <FILE id="AfBZCI" name="ProDelay.h" compile="0" resource="0" file="Source/ProDelay.h"/>
+      <FILE id="EEeTmM" name="ProGain.cpp" compile="1" resource="0" file="Source/ProGain.cpp"/>
+      <FILE id="r1qgOB" name="ProGain.h" compile="0" resource="0" file="Source/ProGain.h"/>
+      <FILE id="JZj7mB" name="ProLFO.cpp" compile="1" resource="0" file="Source/ProLFO.cpp"/>
+      <FILE id="ZoRhUK" name="ProLFO.h" compile="0" resource="0" file="Source/ProLFO.h"/>
+    </GROUP>
+    <GROUP id="{FBCD8AD2-A442-F38D-ACC7-5E221DA438F0}" name="Source">
+      <FILE id="snJuu2" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="Wv4JS0" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="wdzcDb" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="ZlYmwV" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" enablePluginBinaryCopyStep="1" vst3BinaryLocation="C:\Users\minut\Documents\Audio Programming\VSTPlugins"/>
+        <CONFIGURATION isDebug="0" name="Release" enablePluginBinaryCopyStep="1" vst3BinaryLocation="C:\Users\minut\Documents\Audio Programming\VSTPlugins"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_devices" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_formats" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_processors" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_audio_utils" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_core" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_cryptography" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_data_structures" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_events" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_graphics" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_gui_basics" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_gui_extra" path="..\..\JUCE\modules"/>
+        <MODULEPATH id="juce_opengl" path="..\..\JUCE\modules"/>
+      </MODULEPATHS>
+    </VS2017>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_VST3_CAN_REPLACE_VST2="0" JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+</JUCERPROJECT>
