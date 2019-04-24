@@ -33,7 +33,7 @@ void ProGainPanel::paint(Graphics& g)
 
 void ProGainPanel::setParameterID(int inParameterID)
 {
-	mKnob = new ProParameterKnob(mProcessor->parameters, ProParameterID[inParameterID]);
+	mKnob = new ProParameterKnob(mProcessor->parameters, ProParameterID[inParameterID], ProParameterLabel[inParameterID]);
 
 	const int sliderSize = 54;
 

@@ -25,6 +25,18 @@ enum ProParameters
 
 static String ProParameterID[pParameter_TotalNumParameters] =
 {
+	"InputGain",
+	"Time",
+	"Feedback",
+	"WetDry",
+	"Type",
+	"OutputGain",
+	"ModulationRate",
+	"ModulationDepth",
+};
+
+static String ProParameterLabel[pParameter_TotalNumParameters] =
+{
 	"Input Gain",
 	"Time",
 	"Feedback",
@@ -32,5 +44,5 @@ static String ProParameterID[pParameter_TotalNumParameters] =
 	"Type",
 	"Output Gain",
 	"Modulation Rate",
-	"Modulation Depth",
+	"Modulation Depth"
 };

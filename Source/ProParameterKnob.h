@@ -16,7 +16,7 @@ class ProParameterKnob : public Slider
 {
 public:
 
-	ProParameterKnob(AudioProcessorValueTreeState& stateToControl, const String& parameterID);
+	ProParameterKnob(AudioProcessorValueTreeState& stateToControl, const String& parameterID, const String& parameterLabel);
 	~ProParameterKnob();
 
 private:

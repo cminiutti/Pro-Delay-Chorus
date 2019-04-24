@@ -11,9 +11,12 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+
 #include "ProGain.h"
 #include "ProDelay.h"
 #include "ProLFO.h"
+
+#include "ProPresetManager.h"
 
 //==============================================================================
 class ProPluginAudioProcessor  : public AudioProcessor
@@ -59,6 +62,11 @@ public:
 
 	AudioProcessorValueTreeState parameters;
 
+	ProPresetManager* getPresetManager()
+	{
+		return mPresetManager;
+	}
+
 private:
 
 	void initializeDSP();
@@ -68,6 +76,8 @@ private:
 	std::unique_ptr<ProGain> mOutputGain[2];
 	std::unique_ptr<ProDelay> mDelay[2];
 	std::unique_ptr<ProLFO> mLFO[2];
+
+	ScopedPointer<ProPresetManager> mPresetManager;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProPluginAudioProcessor)

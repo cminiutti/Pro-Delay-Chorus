@@ -25,19 +25,21 @@ ProPluginAudioProcessor::ProPluginAudioProcessor()
                        ),
 	parameters(*this, nullptr, "PARAMETERS", 
 		{
-			std::make_unique<AudioParameterFloat>("Input Gain", "Input Gain", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("Output Gain", "Output Gain", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+			std::make_unique<AudioParameterFloat>("InputGain", "InputGain", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+			std::make_unique<AudioParameterFloat>("OutputGain", "OutputGain", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 			std::make_unique<AudioParameterFloat>("Time", "Time", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 			std::make_unique<AudioParameterFloat>("Feedback", "Feedback", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("Wet Dry", "Wet Dry", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+			std::make_unique<AudioParameterFloat>("WetDry", "WetDry", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 			std::make_unique<AudioParameterFloat>("Type", "Type", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("Modulation Rate", "Modulation Rate", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("Modulation Depth", "Modulation Depth", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+			std::make_unique<AudioParameterFloat>("ModulationRate", "ModulationRate", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+			std::make_unique<AudioParameterFloat>("ModulationDepth", "ModulationDepth", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 		})
 #endif
 {
 	//initializeParameters();
 	initializeDSP();
+
+	mPresetManager = new ProPresetManager(this);
 }
 
 ProPluginAudioProcessor::~ProPluginAudioProcessor()
@@ -70,28 +72,28 @@ void ProPluginAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuffe
 		auto* channelData = buffer.getWritePointer(channel);
 
 		mInputGain[channel]->process(channelData,
-			*parameters.getRawParameterValue("Input Gain"),
+			*parameters.getRawParameterValue("InputGain"),
 			channelData,
 			buffer.getNumSamples());
 
 		// Pass LFO to only 1 channel to create stereo width
-		float rate = (channel == 0) ? *parameters.getRawParameterValue("Modulation Rate") : 0.0f;
+		float rate = (channel == 0) ? *parameters.getRawParameterValue("ModulationRate") : 0.0f;
 
 		mLFO[channel]->process(rate,
-			*parameters.getRawParameterValue("Modulation Depth"),
+			*parameters.getRawParameterValue("ModulationDepth"),
 			buffer.getNumSamples());
 
 		mDelay[channel]->process(channelData,
 			*parameters.getRawParameterValue("Time"),
 			*parameters.getRawParameterValue("Feedback"),
-			*parameters.getRawParameterValue("Wet Dry"),
+			*parameters.getRawParameterValue("WetDry"),
 			*parameters.getRawParameterValue("Type"),
 			mLFO[channel]->getBuffer(),
 			channelData,
 			buffer.getNumSamples());
 
 		mOutputGain[channel]->process(channelData,
-			*parameters.getRawParameterValue("Output Gain"),
+			*parameters.getRawParameterValue("OutputGain"),
 			channelData,
 			buffer.getNumSamples());
 	}
@@ -206,15 +208,31 @@ AudioProcessorEditor* ProPluginAudioProcessor::createEditor()
 //==============================================================================
 void ProPluginAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+	XmlElement preset("Pro_StateInfo");
+
+	XmlElement* presetBody = new XmlElement("ProPreset");
+
+	mPresetManager->getXmlForPreset(presetBody);
+
+	preset.addChildElement(presetBody);
+	copyXmlToBinary(preset, destData);
 }
 
 void ProPluginAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+	XmlElement* xmlState = getXmlFromBinary(data, sizeInBytes);
+
+	if (xmlState) 
+	{
+		forEachXmlChildElement(*xmlState, subChild)
+		{
+			mPresetManager->loadPresetForXml(subChild);
+		}
+	}
+	else
+	{
+		jassertfalse;
+	}
 }
 
 void ProPluginAudioProcessor::initializeParameters()

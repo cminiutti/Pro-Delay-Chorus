@@ -70,21 +70,21 @@ void ProEffectsPanel::setEffectsPanelStyle(ProEffectsPanelStyle inStyle)
 	{
 	case pProEffectsPanelStyle_Delay:
 	{
-		ProParameterKnob* time = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_DelayTime]);
+		ProParameterKnob* time = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_DelayTime], ProParameterLabel[pParameter_DelayTime]);
 		time->setBounds(x, y, knobSize, knobSize);
 		addAndMakeVisible(time);
 		mKnobs.add(time);
 
 		x += (knobSize * 2);
 
-		ProParameterKnob* feedback = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_DelayFeedback]);
+		ProParameterKnob* feedback = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_DelayFeedback], ProParameterLabel[pParameter_DelayFeedback]);
 		feedback->setBounds(x, y, knobSize, knobSize);
 		addAndMakeVisible(feedback);
 		mKnobs.add(feedback);
 
 		x += (knobSize * 2);
 
-		ProParameterKnob* wetdry = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_DelayWetDry]);
+		ProParameterKnob* wetdry = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_DelayWetDry], ProParameterLabel[pParameter_DelayWetDry]);
 		wetdry->setBounds(x, y, knobSize, knobSize);
 		addAndMakeVisible(wetdry);
 		mKnobs.add(wetdry);
@@ -93,21 +93,21 @@ void ProEffectsPanel::setEffectsPanelStyle(ProEffectsPanelStyle inStyle)
 
 	case pProEffectsPanelStyle_Chorus:
 	{
-		ProParameterKnob* rate = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_ModulationRate]);
+		ProParameterKnob* rate = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_ModulationRate], ProParameterLabel[pParameter_ModulationRate]);
 		rate->setBounds(x, y, knobSize, knobSize);
 		addAndMakeVisible(rate);
 		mKnobs.add(rate);
 
 		x += (knobSize * 2);
 
-		ProParameterKnob* depth = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_ModulationDepth]);
+		ProParameterKnob* depth = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_ModulationDepth], ProParameterLabel[pParameter_ModulationDepth]);
 		depth->setBounds(x, y, knobSize, knobSize);
 		addAndMakeVisible(depth);
 		mKnobs.add(depth);
 
 		x += (knobSize * 2);
 
-		ProParameterKnob* wetdry = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_DelayWetDry]);
+		ProParameterKnob* wetdry = new ProParameterKnob(mProcessor->parameters, ProParameterID[pParameter_DelayWetDry], ProParameterLabel[pParameter_DelayWetDry]);
 		wetdry->setBounds(x, y, knobSize, knobSize);
 		addAndMakeVisible(wetdry);
 		mKnobs.add(wetdry);

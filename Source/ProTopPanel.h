@@ -12,7 +12,7 @@
 
 #include "ProPanelBase.h"
 
-class ProTopPanel	:	public ProPanelBase
+class ProTopPanel	:	public ProPanelBase, public Button::Listener, public ComboBox::Listener
 {
 public:
 
@@ -21,6 +21,14 @@ public:
 
 	void paint(Graphics& g) override;
 
+	void buttonClicked(Button*) override;
+	void comboBoxChanged(ComboBox* comboBoxThatHasChanged) override;
+
 private:
 
+	void displaySaveAsPopup();
+	void updatePresetComboBox();
+
+	ScopedPointer<ComboBox> mPresetDisplay;
+	ScopedPointer<TextButton> mNewPreset, mSavePreset, mSaveAsPreset;
 };
