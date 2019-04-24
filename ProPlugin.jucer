@@ -2,6 +2,12 @@
 
 <JUCERPROJECT id="G6Ujzv" name="ProPlugin" projectType="audioplug" jucerVersion="5.4.3">
   <MAINGROUP id="a1lk7v" name="ProPlugin">
+    <GROUP id="{D279F6E6-E13E-FEC3-B96C-B737BC2439DB}" name="Managers">
+      <FILE id="An6sno" name="ProPresetManager.cpp" compile="1" resource="0"
+            file="Source/ProPresetManager.cpp"/>
+      <FILE id="qSb5km" name="ProPresetManager.h" compile="0" resource="0"
+            file="Source/ProPresetManager.h"/>
+    </GROUP>
     <GROUP id="{D7D072F8-C36A-AE99-3802-ED50E371CD66}" name="Parameter Control">
       <FILE id="xw6noN" name="ProComboBox.cpp" compile="1" resource="0" file="Source/ProComboBox.cpp"/>
       <FILE id="LEBpvJ" name="ProComboBox.h" compile="0" resource="0" file="Source/ProComboBox.h"/>
