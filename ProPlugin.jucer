@@ -2,6 +2,10 @@
 
 <JUCERPROJECT id="G6Ujzv" name="ProPlugin" projectType="audioplug" jucerVersion="5.4.3">
   <MAINGROUP id="a1lk7v" name="ProPlugin">
+    <GROUP id="{F6A98807-5FC6-AA51-5741-146A9136A7F0}" name="Components">
+      <FILE id="VjXD9g" name="ProVuMeter.cpp" compile="1" resource="0" file="Source/ProVuMeter.cpp"/>
+      <FILE id="rcnBD6" name="ProVuMeter.h" compile="0" resource="0" file="Source/ProVuMeter.h"/>
+    </GROUP>
     <GROUP id="{D279F6E6-E13E-FEC3-B96C-B737BC2439DB}" name="Managers">
       <FILE id="An6sno" name="ProPresetManager.cpp" compile="1" resource="0"
             file="Source/ProPresetManager.cpp"/>
@@ -48,6 +52,8 @@
             file="Source/ProHelperFunctions.h"/>
       <FILE id="vNDLlJ" name="ProInterfaceDefines.h" compile="0" resource="0"
             file="Source/ProInterfaceDefines.h"/>
+      <FILE id="cuYvk4" name="ProLookAndFeel.h" compile="0" resource="0"
+            file="Source/ProLookAndFeel.h"/>
       <FILE id="rGmwmh" name="ProParameters.h" compile="0" resource="0" file="Source/ProParameters.h"/>
     </GROUP>
     <GROUP id="{5D964958-3E0E-0D2C-3AD0-9D3934899F3E}" name="DSP">
@@ -66,6 +72,11 @@
       <FILE id="wdzcDb" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="ZlYmwV" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+    <GROUP id="{46DCACBC-3E31-AD01-2F1A-749CEA35B066}" name="Assets">
+      <FILE id="jEglmR" name="kadenze_bg.png" compile="0" resource="1" file="Assets/kadenze_bg.png"/>
+      <FILE id="WUbE8u" name="kadenze_knob.png" compile="0" resource="1"
+            file="Assets/kadenze_knob.png"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
