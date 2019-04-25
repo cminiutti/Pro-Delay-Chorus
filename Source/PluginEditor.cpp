@@ -19,6 +19,13 @@ ProPluginAudioProcessorEditor::ProPluginAudioProcessorEditor (ProPluginAudioProc
 
 	mMainPanel = new ProMainPanel(&processor);
 	addAndMakeVisible(mMainPanel);
+
+	mLookAndFeel = new ProLookAndFeel();
+	setLookAndFeel(mLookAndFeel);
+
+	LookAndFeel::setDefaultLookAndFeel(mLookAndFeel);
+
+	mBackgroundImage = ImageCache::getFromMemory(BinaryData::kadenze_bg_png, BinaryData::kadenze_bg_pngSize);
 }
 
 ProPluginAudioProcessorEditor::~ProPluginAudioProcessorEditor()
@@ -28,7 +35,7 @@ ProPluginAudioProcessorEditor::~ProPluginAudioProcessorEditor()
 //==============================================================================
 void ProPluginAudioProcessorEditor::paint (Graphics& g)
 {
-    g.fillAll (Colours::white);
+	g.drawImage(mBackgroundImage, getLocalBounds().toFloat());
 }
 
 void ProPluginAudioProcessorEditor::resized()

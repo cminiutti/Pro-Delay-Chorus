@@ -12,6 +12,7 @@
 
 #include "ProPanelBase.h"
 #include "ProParameterKnob.h"
+#include "ProVuMeter.h"
 
 class ProGainPanel : public ProPanelBase
 {
@@ -26,6 +27,7 @@ public:
 
 private:
 
+	ScopedPointer<ProVuMeter> mVuMeter;
 	ScopedPointer<ProParameterKnob> mKnob;
 
 };

@@ -23,6 +23,9 @@ public:
 
 	void paint(Graphics &g) override;
 
+	void mouseEnter(const MouseEvent& event) override;
+	void mouseExit(const MouseEvent& event) override;
+
 protected:
 
 	ProPluginAudioProcessor* mProcessor;

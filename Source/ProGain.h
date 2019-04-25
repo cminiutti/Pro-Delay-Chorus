@@ -19,5 +19,9 @@ public:
 
 	void process(float* inAudio, float inGain, float* outAudio, int inNumSamplesToRender);
 
+	float getMeterLevel();
+
 private:
+
+	float mOutputSmoothed;
 };

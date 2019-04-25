@@ -61,7 +61,12 @@ void ProTopPanel::paint(Graphics& g)
 {
 	ProPanelBase::paint(g);
 
-	g.drawFittedText("PRO AUDIO PLUGIN", 0, 0, getWidth() - 10, getHeight() - 10, Justification::centredRight, 1);
+	g.setColour(ProColour_1);
+	g.setFont(font_2);
+
+	const int label_w = 220;
+
+	g.drawFittedText("Pro Audio Plugin", TOP_PANEL_WIDTH - label_w, 0, label_w, getHeight() - 10, Justification::centredRight, 1);
 }
 
 void ProTopPanel::buttonClicked(Button* b)

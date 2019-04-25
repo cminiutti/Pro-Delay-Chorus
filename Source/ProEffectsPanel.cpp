@@ -31,24 +31,31 @@ void ProEffectsPanel::paint(Graphics& g)
 {
 	ProPanelBase::paint(g);
 
+	String label;
+
 	switch (mStyle)
 	{
 		case pProEffectsPanelStyle_Delay:
 		{
-			g.drawFittedText("DELAY", 0, 0, getWidth(), getHeight() * 0.75, Justification::centred, 1);
+			label = "DELAY";
 		} break;
 
 		case pProEffectsPanelStyle_Chorus:
 		{
-			g.drawFittedText("CHORUS", 0, 0, getWidth(), getHeight() * 0.75, Justification::centred, 1);
+			label = "CHORUS";
 		} break;
 
-		case pProEffectsPanelStyle_TotalNumStyles:
+		default:
+		case(pProEffectsPanelStyle_TotalNumStyles):
 		{
-			g.drawFittedText("NONONO", 0, 0, getWidth(), getHeight(), Justification::centred, 1);
 			jassertfalse;
 		} break;
 	}
+
+	g.setColour(ProColour_5);
+	g.setFont(font_3);
+
+	g.drawText(label, 0, 0, getWidth(), 80, Justification::centred);
 
 	for (int i = 0; i < mKnobs.size(); i++)
 	{

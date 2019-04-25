@@ -9,9 +9,10 @@
 */
 
 #include "ProGain.h"
-#include "JuceHeader.h"
+#include "ProAudioHelpers.h"
 
 ProGain::ProGain()
+	:	mOutputSmoothed(0)
 {
 
 }
@@ -30,4 +31,12 @@ void ProGain::process(float* inAudio, float inGain, float* outAudio, int inNumSa
 	{
 		outAudio[i] = inAudio[i] * gainMapped;
 	}
+
+	float absValue = fabs(outAudio[0]);
+	mOutputSmoothed = ProMeterSmoothingCoefficient * (mOutputSmoothed - absValue) + absValue;
+}
+
+float ProGain::getMeterLevel()
+{
+	return mOutputSmoothed;
 }

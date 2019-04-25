@@ -60,6 +60,9 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+	float getInputGainMeterLevel(int inChannel);
+	float getOutputGainMeterLevel(int inChannel);
+
 	AudioProcessorValueTreeState parameters;
 
 	ProPresetManager* getPresetManager()

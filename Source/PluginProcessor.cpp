@@ -30,7 +30,7 @@ ProPluginAudioProcessor::ProPluginAudioProcessor()
 			std::make_unique<AudioParameterFloat>("Time", "Time", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 			std::make_unique<AudioParameterFloat>("Feedback", "Feedback", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 			std::make_unique<AudioParameterFloat>("WetDry", "WetDry", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("Type", "Type", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+			std::make_unique<AudioParameterFloat>("Type", "Type", NormalisableRange<float>(0.0f, 1.0f), 0.0f),
 			std::make_unique<AudioParameterFloat>("ModulationRate", "ModulationRate", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 			std::make_unique<AudioParameterFloat>("ModulationDepth", "ModulationDepth", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 		})
@@ -233,6 +233,18 @@ void ProPluginAudioProcessor::setStateInformation (const void* data, int sizeInB
 	{
 		jassertfalse;
 	}
+}
+
+float ProPluginAudioProcessor::getInputGainMeterLevel(int inChannel)
+{
+	const float normalizeddB = dBToNormalizedGain(mInputGain[inChannel]->getMeterLevel());
+	return normalizeddB;
+}
+
+float ProPluginAudioProcessor::getOutputGainMeterLevel(int inChannel)
+{
+	const float normalizeddB = dBToNormalizedGain(mOutputGain[inChannel]->getMeterLevel());
+	return normalizeddB;
 }
 
 void ProPluginAudioProcessor::initializeParameters()
