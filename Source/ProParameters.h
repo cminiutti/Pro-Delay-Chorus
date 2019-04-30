@@ -46,3 +46,5 @@ static String ProParameterLabel[pParameter_TotalNumParameters] =
 	"Modulation Rate",
 	"Modulation Depth"
 };
+
+static std::vector<float> ProParameterDefaultValue{ 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f };

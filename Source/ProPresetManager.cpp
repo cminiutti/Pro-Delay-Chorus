@@ -40,12 +40,15 @@ ProPresetManager::~ProPresetManager()
 
 void ProPresetManager::getXmlForPreset(XmlElement* inElement)
 {
-	const int numParameters = mProcessor->getNumParameters();
+	auto& parameters = mProcessor->getParameters();
 
-	for (int i = 0; i < numParameters; i++)
+	for (int i = 0; i < parameters.size(); i++)
 	{
-		inElement->setAttribute(mProcessor->getParameterName(i),
-								mProcessor->getParameter(i));
+		AudioProcessorParameterWithID* parameter =
+		(AudioProcessorParameterWithID*)parameters.getUnchecked(i);
+
+		inElement->setAttribute(parameter->paramID,
+								parameter->getValue());
 	}
 }
 
@@ -53,16 +56,21 @@ void ProPresetManager::loadPresetForXml(XmlElement* inElement)
 {
 	mCurrentPresetXml = inElement;
 
+	auto& parameters = mProcessor->getParameters();
+
 	for (int i = 0; i < mCurrentPresetXml->getNumAttributes(); i++)
 	{
-		const String name = mCurrentPresetXml->getAttributeName(i);
-		const float value = mCurrentPresetXml->getDoubleAttribute(name);
+		const String paramID = mCurrentPresetXml->getAttributeName(i);
+		const float value = mCurrentPresetXml->getDoubleAttribute(paramID);
 
-		for (int j = 0; j < mProcessor->getNumParameters(); j++)
+		for (int j = 0; j < parameters.size(); j++)
 		{
-			if (mProcessor->getParameterName(j) == name)
+			AudioProcessorParameterWithID* parameter =
+			(AudioProcessorParameterWithID*)parameters.getUnchecked(i);
+
+			if (paramID == parameter->paramID)
 			{
-				mProcessor->setParameterNotifyingHost(j, value);
+				parameter->setValueNotifyingHost(value);
 			}
 		}
 	}
@@ -80,11 +88,16 @@ String ProPresetManager::getPresetName(int inPresetIndex)
 
 void ProPresetManager::createNewPreset()
 {
-	const int numParameters = mProcessor->getNumParameters();
+	auto& parameters = mProcessor->getParameters();
 
-	for (int i = 0; i < numParameters; i++)
+	for (int i = 0; i < parameters.size(); i++)
 	{
-		mProcessor->setParameterNotifyingHost(i, mProcessor->getParameterDefaultValue(i));
+		AudioProcessorParameterWithID* parameter =
+		(AudioProcessorParameterWithID*)parameters.getUnchecked(i);
+
+		const float defaultValue = parameter->getDefaultValue();
+
+		parameter->setValueNotifyingHost(defaultValue);
 	}
 
 	mCurrentPresetIsSaved = false;

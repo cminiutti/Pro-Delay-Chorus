@@ -23,16 +23,13 @@ ProPanelBase::~ProPanelBase()
 
 void ProPanelBase::paint(Graphics &g)
 {
-	/*g.setColour(Colours::purple);
-	g.fillAll();
-
-	g.setColour(Colours::black);
-	g.drawRoundedRectangle(0, 0, getWidth(), getHeight(), 4, 2);*/
-
-	// Highlight panels when mouse is hovering over
-	/*if (isMouseOver())
+	/*// Highlight panels when mouse is hovering over
+	if (isMouseOver(true))
 	{
-		g.setColour(ProColour_4);
+		const Colour hoverColour =
+		Colour(Colours::black).withAlpha(0.4f);
+
+		g.setColour(hoverColour);
 		g.fillAll();
 	}*/
 }

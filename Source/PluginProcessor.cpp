@@ -23,23 +23,11 @@ ProPluginAudioProcessor::ProPluginAudioProcessor()
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
                        ),
-	parameters(*this, nullptr, "PARAMETERS", 
-		{
-			std::make_unique<AudioParameterFloat>("InputGain", "InputGain", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("OutputGain", "OutputGain", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("Time", "Time", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("Feedback", "Feedback", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("WetDry", "WetDry", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("Type", "Type", NormalisableRange<float>(0.0f, 1.0f), 0.0f),
-			std::make_unique<AudioParameterFloat>("ModulationRate", "ModulationRate", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-			std::make_unique<AudioParameterFloat>("ModulationDepth", "ModulationDepth", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-		})
+	parameters(*this, nullptr, juce::Identifier("PRO"), createParameterLayout())
 #endif
 {
-	//initializeParameters();
 	initializeDSP();
-
-	mPresetManager = new ProPresetManager(this);
+	mPresetManager = std::make_unique<ProPresetManager>(this);
 }
 
 ProPluginAudioProcessor::~ProPluginAudioProcessor()
@@ -72,31 +60,46 @@ void ProPluginAudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBuffe
 		auto* channelData = buffer.getWritePointer(channel);
 
 		mInputGain[channel]->process(channelData,
-			*parameters.getRawParameterValue("InputGain"),
+			*parameters.getRawParameterValue(ProParameterID[pParameter_InputGain]),
 			channelData,
 			buffer.getNumSamples());
 
 		// Pass LFO to only 1 channel to create stereo width
-		float rate = (channel == 0) ? *parameters.getRawParameterValue("ModulationRate") : 0.0f;
+		float rate = (channel == 0) ? *parameters.getRawParameterValue(ProParameterID[pParameter_ModulationRate]) : 0.0f;
 
 		mLFO[channel]->process(rate,
-			*parameters.getRawParameterValue("ModulationDepth"),
+			*parameters.getRawParameterValue(ProParameterID[pParameter_ModulationDepth]),
 			buffer.getNumSamples());
 
 		mDelay[channel]->process(channelData,
-			*parameters.getRawParameterValue("Time"),
-			*parameters.getRawParameterValue("Feedback"),
-			*parameters.getRawParameterValue("WetDry"),
-			*parameters.getRawParameterValue("Type"),
+			*parameters.getRawParameterValue(ProParameterID[pParameter_DelayTime]),
+			*parameters.getRawParameterValue(ProParameterID[pParameter_DelayFeedback]),
+			*parameters.getRawParameterValue(ProParameterID[pParameter_DelayWetDry]),
+			*parameters.getRawParameterValue(ProParameterID[pParameter_DelayType]),
 			mLFO[channel]->getBuffer(),
 			channelData,
 			buffer.getNumSamples());
 
 		mOutputGain[channel]->process(channelData,
-			*parameters.getRawParameterValue("OutputGain"),
+			*parameters.getRawParameterValue(ProParameterID[pParameter_OutputGain]),
 			channelData,
 			buffer.getNumSamples());
 	}
+}
+
+AudioProcessorValueTreeState::ParameterLayout ProPluginAudioProcessor::createParameterLayout()
+{
+	std::vector<std::unique_ptr<AudioParameterFloat>> params;
+
+	for (int i = 0; i < pParameter_TotalNumParameters; i++)
+	{
+		params.push_back(std::make_unique<AudioParameterFloat>(ProParameterID[i], 
+															   ProParameterLabel[i], 
+															   NormalisableRange<float>(0.0f, 1.0f), 
+															   ProParameterDefaultValue[i]));
+	}
+
+	return { params.begin(), params.end() };
 }
 
 //==============================================================================
@@ -220,9 +223,11 @@ void ProPluginAudioProcessor::getStateInformation (MemoryBlock& destData)
 
 void ProPluginAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-	XmlElement* xmlState = getXmlFromBinary(data, sizeInBytes);
+	std::unique_ptr<XmlElement> xmlState;
 
-	if (xmlState) 
+	xmlState.reset(getXmlFromBinary(data, sizeInBytes));
+
+	if (xmlState != nullptr) 
 	{
 		forEachXmlChildElement(*xmlState, subChild)
 		{
@@ -245,20 +250,6 @@ float ProPluginAudioProcessor::getOutputGainMeterLevel(int inChannel)
 {
 	const float normalizeddB = dBToNormalizedGain(mOutputGain[inChannel]->getMeterLevel());
 	return normalizeddB;
-}
-
-void ProPluginAudioProcessor::initializeParameters()
-{
-	for (int i = 0; i < pParameter_TotalNumParameters; i++)
-	{
-		parameters.createAndAddParameter(ProParameterID[i],
-										 ProParameterID[i],
-										 ProParameterID[i],
-										 NormalisableRange<float>(0.0f, 1.0f),
-										 0.5f,
-										 nullptr,
-										 nullptr);
-	}
 }
 
 void ProPluginAudioProcessor::initializeDSP()

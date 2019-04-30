@@ -63,24 +63,26 @@ public:
 	float getInputGainMeterLevel(int inChannel);
 	float getOutputGainMeterLevel(int inChannel);
 
+	AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+
 	AudioProcessorValueTreeState parameters;
 
 	ProPresetManager* getPresetManager()
 	{
-		return mPresetManager;
+		// Returns a stored pointer pointing to the object managed by unique_ptr
+		return mPresetManager.get();
 	}
 
 private:
 
 	void initializeDSP();
-	void initializeParameters();
 
 	std::unique_ptr<ProGain> mInputGain[2];
 	std::unique_ptr<ProGain> mOutputGain[2];
 	std::unique_ptr<ProDelay> mDelay[2];
 	std::unique_ptr<ProLFO> mLFO[2];
 
-	ScopedPointer<ProPresetManager> mPresetManager;
+	std::unique_ptr<ProPresetManager> mPresetManager;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ProPluginAudioProcessor)
