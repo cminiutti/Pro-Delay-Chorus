@@ -8,8 +8,9 @@ This plugin features a Delay module with distortion capability in the feedback l
 
 The Pro Delay/Chorus project cleanly organizes the plug-in architecture by packaging all DSP code into individual modules to support easy signal-chain reconfiguration and by formatting the UI in a manner that allows adjustments to be made simply without having to change multiple lines throughout the project. These considerations also provide a great aid to the debugging process.
 
+## GUI
+![](ProPluginGUI.PNG)
+
+
 (**NOTE**: 
 *This plugin was built as a part of the Kadenze course offered by Output, Inc. titled "Advanced Audio Plugin Development". All graphical assets were provided by Output, Inc.*)
-
-## GUI:
-![](ProPluginGUI.PNG)
